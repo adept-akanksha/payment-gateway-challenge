@@ -4,15 +4,15 @@ class WebsiteController < ApplicationController
   end
 
   def donate
-    charity_service = CharityService.new(params)
-    charity_service.process
+    donate_service = DonationService.new(params)
+    donate_service.process
 
-    if charity_service.charge&.paid
-      flash.notice = t(".success", amount: charity_service.formatted_amount)
+    if donate_service.charge&.paid
+      flash.notice = t(".success", amount: donate_service.formatted_amount)
       redirect_to root_path
     else
-      @token = charity_service.token
-      flash.now.alert = charity_service.errors.to_sentence
+      @token = donate_service.token
+      flash.now.alert = donate_service.errors.to_sentence
       render :index
     end
   end

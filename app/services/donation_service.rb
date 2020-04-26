@@ -1,4 +1,4 @@
-class CharityService < Validators::CharityValidator
+class DonationService < Validators::CharityValidator
   attr_reader :charge
 
   def initialize(options = {})
@@ -9,9 +9,9 @@ class CharityService < Validators::CharityValidator
   end
 
   def process
-    if validate?
+    if valid?
       process_charge
-      post_process_charge
+      process_credit_amount
     else
       @token = get_retrieve_token
     end
@@ -40,7 +40,7 @@ class CharityService < Validators::CharityValidator
     })
   end
 
-  def post_process_charge
+  def process_credit_amount
     charity.credit_amount(charge.amount) && return if charge.paid
     errors << I18n.t('website.donate.failure')
     @token = nil

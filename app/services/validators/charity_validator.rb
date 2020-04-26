@@ -1,32 +1,37 @@
 module Validators
   class CharityValidator
+    class CharityValidationException < StandardError; end
+
     attr_reader :charity, :amount, :token, :errors
     TRANSLATION_SCOPE = %w(validators charity)
 
-    def validate?
-      validate_token? && validate_amount? && validate_charity?
+    def valid?
+      valid_token? && valid_amount? && valid_charity?
+    rescue CharityValidationException => e
+      false
     end
 
-    def validate_token?
+    def valid_token?
       return true if token.present?
-      t("token_not_present") && false
+      raise_exception("token_not_present")
     end
 
-    def validate_charity?
+    def valid_charity?
       return true if charity.present?
-      t("charity_not_present") && false
+      raise_exception("charity_not_present")
     end
 
-    def validate_amount?
+    def valid_amount?
       return true if amount.to_f > 20
       error = amount.blank? ? "amount_can_not_be_blank" : "amount_not_valid"
-      t(error) && false
+      raise_exception(error)
     end
 
     private
 
-    def t(error)
+    def raise_exception(error)
       errors << I18n.t(error, scope: TRANSLATION_SCOPE)
+      raise CharityValidationException.new "Invalid Record"
     end
   end
 end

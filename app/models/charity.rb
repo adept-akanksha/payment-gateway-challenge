@@ -8,6 +8,6 @@ class Charity < ActiveRecord::Base
   end
 
   def self.random_charity
-    Charity.all.sample
+    Charity.order(Arel.sql("RANDOM()")).first
   end
 end

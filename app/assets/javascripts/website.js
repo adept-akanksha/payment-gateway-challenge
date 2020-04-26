@@ -1,8 +1,5 @@
 $(document).on("ready", function () {
 
-  $('.random-charity').change(function(){
-    $('.radio-charity').prop('disabled', this.checked);
-  }).change();
 
   $("#donate").submit(function () {
 
@@ -49,7 +46,13 @@ $(document).on("ready", function () {
 
   });
 
-  $('#amount').on('input', function () {
+  // Disable radio buttons if random charity option is selected
+  $('.random-charity').on("change", function(){
+    $('.radio-charity').prop('disabled', this.checked);
+  });
+
+  // Limit 2 decimal places in amount input field
+  $('#amount').on("input", function () {
     this.value = this.value.match(/^\d+\.?\d{0,2}/);
   });
 });
