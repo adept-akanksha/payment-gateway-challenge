@@ -1,7 +1,13 @@
 class Charity < ActiveRecord::Base
   validates :name, presence: true
 
+  DEFAULT_CURRENCY = 'THB'
+
   def credit_amount(amount)
-    update_column :total, total + amount
+    self.with_lock { update_column :total, total + amount }
+  end
+
+  def self.random_charity
+    Charity.all.sample
   end
 end

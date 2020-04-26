@@ -26,4 +26,8 @@ class ActiveSupport::TestCase
     assert_select "a[href='#{path}']"
     get path
   end
+
+  def formatted_amount(amount)
+    Money.new(amount, Charity::DEFAULT_CURRENCY).format
+  end
 end

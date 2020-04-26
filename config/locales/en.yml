@@ -12,5 +12,13 @@ en:
   website:
     donate:
       link: "Donate"
-      success: "Success you've donated some money money money."
+      success: "Success you've donated %{amount}."
       failure: "It seems like this didn't work so well. Try again maybe?"
+      select_random_charity: "Donate to a random charity"
+
+  validators:
+    charity:
+      token_not_present: "Omise Card token not present."
+      charity_not_present: "Charity can not be blank."
+      amount_can_not_be_blank: "Charity amount should not be blank."
+      amount_not_valid: "Charity amount should be greater than or equal to 20"

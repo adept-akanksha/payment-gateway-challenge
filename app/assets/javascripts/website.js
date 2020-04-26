@@ -1,5 +1,9 @@
 $(document).on("ready", function () {
 
+  $('.random-charity').change(function(){
+    $('.radio-charity').prop('disabled', this.checked);
+  }).change();
+
   $("#donate").submit(function () {
 
     var form = $(this);
@@ -22,7 +26,7 @@ $(document).on("ready", function () {
     // Send a request to create a token then trigger the callback function once
     // a response is received from Omise.
     //
-    // Note that the response could be an error and this needs to be handled 
+    // Note that the response could be an error and this needs to be handled
     // within the callback.
     Omise.createToken("card", card, function (statusCode, response) {
       if (response.object == "error") {
@@ -45,4 +49,7 @@ $(document).on("ready", function () {
 
   });
 
+  $('#amount').on('input', function () {
+    this.value = this.value.match(/^\d+\.?\d{0,2}/);
+  });
 });
