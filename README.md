@@ -1,8 +1,7 @@
-![Tam Boon](https://cdn.omise.co/assets/tamboon.jpg)
 
-# Tam Boon
+# Payment Gateway
 
-_Tam boon_ (which means "making merit" in Thai) is a simple Ruby on Rails
+Payment Gateway is a simple Ruby on Rails
 app that contains bugs and rough code that you need to fix and refactor
 in order to be offered an interview at Omise.
 
